@@ -24,7 +24,13 @@ public class Conge {
     @Temporal(TemporalType.DATE)
     private Date dateFin;
 
-    @Temporal(TemporalType.DATE)
+    @Override
+	public String toString() {
+		return "Conge [id=" + id + ", description=" + description + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin
+				+ ", dateRupture=" + dateRupture + ", etat=" + etat + ", employe=" + employe.getNom() + "]";
+	}
+
+	@Temporal(TemporalType.DATE)
     private Date dateRupture;
 
     @Enumerated(EnumType.STRING)
@@ -46,7 +52,30 @@ public class Conge {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Conge(@NotNull String description, @NotNull Date dateDebut, @NotNull Date dateFin, Date dateRupture,
+			EtatConge etat, Employee employe) {
+		super();
+		this.description = description;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.dateRupture = dateRupture;
+		this.etat = etat;
+		this.employe = employe;
+	}
+
+	public Conge(@NotNull String description, @NotNull Date dateDebut, @NotNull Date dateFin, Employee employe) {
+		super();
+		this.description = description;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.employe = employe;
+	}
+
+	public Conge() {
+		super();
+	}
+
+	public void setDescription(String description) {
         this.description = description;
     }
 
@@ -88,5 +117,9 @@ public class Conge {
 
     public void setEmploye(Employee employe) {
         this.employe = employe;
+    }
+    
+    public String getEtatLowerCase() {
+        return this.etat.name().toLowerCase();
     }
 }

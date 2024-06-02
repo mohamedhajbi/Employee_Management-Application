@@ -7,3 +7,53 @@ color :red;
 spacer {
 margin-top: 40px
 }
+ .alert-info {
+            margin-top: 1rem;
+            background-color: #FFFFFF;
+}
+.alert-info.error {
+       color: red;
+       background-color: #FFFFFF;
+       
+}
+.alert-info.success {
+            color: green;
+            background-color: #FFFFFF;
+            
+}
+.sollicite {
+    background-color: #e0f7fa;
+    color: #00796b;
+}
+
+.valide {
+    background-color: #d4edda;
+    color: #155724;
+    
+}
+
+.refuse {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.annule {
+    background-color: #e0e0e0;
+    /* color: #616161; */
+    color :red;
+}
+
+.en_cours {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.arrete {
+    background-color: #ffebee;
+    color: #b71c1c;
+}
+
+.fini {
+    background-color: #e8eaf6;
+    color: #283593;
+}

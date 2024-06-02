@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+</head>
+<body>
+    <section class="container">
+        <div class="login-container">
+            <div class="circle circle-one"></div>
+            <div class="form-container">
+                <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
+                <h1 class="opacity">Login</h1>
+                <form id="loginForm" th:action="@{/login}" method="post">
+                    <label for="login">Login:</label>
+                    <input type="text" id="login" name="login" placeholder="USERNAME"/>
+                    <div id="loginError" class="error-message"></div>
+                    <br/>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="PASSWORD"/>
+                    <div id="passwordError" class="error-message"></div>
+                    <br/>
+                    <button type="submit" class="opacity">Login</button>
+                </form>
+            </div>
+            <div class="circle circle-two"></div>
+        </div>
+        <div class="theme-btn-container"></div>
+    </section>
+    <script th:src="@{/js/login.js}"></script>
+</body>
+</html>

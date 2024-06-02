@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout_conge}">
+<head>
+    <meta charset="utf-8"/>
+    <title>Liste des Congés</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/mon_style.css" th:href="@{/css/mon_style.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <!-- Message de bienvenue -->
+        <div>
+            <h2 th:text="'Bienvenue, ' + ${username} + '!'"></h2>
+        </div>
+
+        <form th:action="@{/conges/index}" method="get">
+            <label>Mot Clé:</label>
+            <input type="text" name="motCle" th:value="${motCle}"/>
+            <button class="btn btn-primary">Chercher</button>
+        </form>
+    </div>
+    <div class="container spacer">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date Début</th>
+                <th>Date Fin</th>
+                <th>Description</th>
+                <th>Etat</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="conge : ${pageConges}">
+                <td th:text="${conge.id}"></td>
+                <td th:text="${conge.dateDebut}"></td>
+                <td th:text="${conge.dateFin}"></td>
+                <td th:text="${conge.description}"></td>
+                <td th:text="${conge.etat}"></td>
+                <td>
+                    <a th:href="@{/conges/edit/{id}(id=${conge.id})}">Editer</a>
+                    <a th:href="@{/conges/delete/{id}(id=${conge.id})}"
+                       onclick="return confirm('Confirmez-vous la suppression de ce congé?')">Supprimer</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

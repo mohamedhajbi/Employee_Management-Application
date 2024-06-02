@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Liste des Congés</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/mon_style.css" th:href="@{/css/mon_style.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/admin.css}"/> <!-- Ajout du fichier CSS -->
+    <script src="../static/js/script.js" th:src="@{/js/admin.js}"></script> <!-- Ajout du fichier JS -->
+</head>
+<body>
+<div class="container">
+    <h2>Liste des Congés</h2>
+
+    <form th:action="@{/admin/conges/filter}" method="get">
+        <label>Employé ID:</label>
+        <input type="text" name="employeId" />
+        <label>État:</label>
+        <select name="etat">
+            <option value="">Tous</option>
+            <option value="SOLLICITE">Sollicité</option>
+            <option value="VALIDE">Validé</option>
+            <option value="REFUSE">Refusé</option>
+            <option value="EN_COURS">En cours</option>
+            <option value="FINI">Fini</option>
+            <option value="ARRETE">Arrêté</option>
+        </select>
+        <label>Année:</label>
+        <input type="text" name="year" />
+        <button class="btn btn-primary">Filtrer</button>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date Début</th>
+                <th>Date Fin</th>
+                <th>Description</th>
+                <th>État</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="conge : ${conges}">
+                <td th:text="${conge.id}"></td>
+                <td th:text="${#dates.format(conge.dateDebut, 'yyyy-MM-dd')}"></td>
+                <td th:text="${#dates.format(conge.dateFin, 'yyyy-MM-dd')}"></td>
+                <td th:text="${conge.description}"></td>
+                <td th:text="${conge.etat}" th:class="${conge.etat.name()}"></td>
+                <td>
+                    <form th:action="@{/admin/conges/validate/{id}(id=${conge.id})}" method="post" style="display:inline;">
+                        <button class="btn btn-success" type="submit">Valider</button>
+                    </form>
+                    <form th:action="@{/admin/conges/refuse/{id}(id=${conge.id})}" method="post" style="display:inline;">
+                        <button class="btn btn-danger" type="submit">Refuser</button>
+                    </form>
+                    <form th:action="@{/admin/conges/stop/{id}(id=${conge.id})}" method="post" style="display:inline;">
+                        <button class="btn btn-warning" type="submit">Arrêter</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="theme-btn-container"></div>
+</body>
+</html>

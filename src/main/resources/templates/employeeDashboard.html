@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout_conge}">
+<head>
+    <meta charset="utf-8">
+    <title>Employee Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/mon_style.css" th:href="@{/css/employeeDash.css}"/>
+    <script src="../static/js/script.js" th:src="@{/js/admin.js}"></script> 
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <h1>Welcome, <span th:text="${user.nom}">User</span></h1>
+        <h2>Your Leaves</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <!-- Filter Form -->
+                <form method="get" th:action="@{/conges/filterconges}" class="form-inline">
+                    <div class="form-group">
+                        <label for="etat">Status:</label>
+                        <select id="etat" name="etat" class="form-control">
+                            <option value="" selected>All</option>
+                            <option value="SOLLICITE">SOLLICITE</option>
+                            <option value="VALIDE">VALIDE</option>
+                            <option value="REFUSE">REFUSE</option>
+                            <option value="ANNULE">ANNULE</option>
+                            <option value="EN_COURS">EN_COURS</option>
+                            <option value="ARRETE">ARRETE</option>
+                            <option value="FINI">FINI</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Leave Requests Table -->
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="conge : ${conges}" th:classappend="${conge.etat.toLowerCase()}">
+                        <td th:text="${conge.description}">Description</td>
+                        <td th:text="${#dates.format(conge.dateDebut, 'yyyy-MM-dd')}">Start Date</td>
+                        <td th:text="${#dates.format(conge.dateFin, 'yyyy-MM-dd')}">End Date</td>
+                        <td th:text="${conge.etat}">Status</td>
+                        <td>
+                            <button th:if="${conge.etat.name() == 'SOLLICITE'}" th:onclick="'window.location.href=\'/conges/cancel/' + ${conge.id} + '\''" class="btn btn-danger">Cancel</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="theme-btn-container"></div>
+</div>
+</body>
+</html>

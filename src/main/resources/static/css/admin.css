@@ -1,0 +1,57 @@
+/* style.css */
+
+:root {
+    --background: #1a1a2e;
+    --color: #ffffff;
+    --primary-color: #0f3460;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--color);
+    font-family: "Poppins", sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+    color: var(--color);
+}
+
+h2 {
+    color: var(--primary-color);
+    margin-bottom:3rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: darken(var(--primary-color), 10%);
+    border-color: darken(var(--primary-color), 10%);
+}
+.table {
+	margin-top:5rem;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+	
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+
+.theme-btn-container {
+    position: absolute;
+    left: 0;
+    bottom: 2rem;
+}
+
+.theme-btn {
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+}
+
+.theme-btn:hover {
+    width: 40px !important;
+}

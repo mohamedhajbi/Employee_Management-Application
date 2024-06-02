@@ -18,7 +18,13 @@ public class User {
     @Size(max = 50)
     private String code;
 
-    @NotNull
+    @Override
+	public String toString() {
+		return "User [id=" + id + ", code=" + code + ", nom=" + nom + ", prenom=" + prenom + ", dateEmbauchement="
+				+ dateEmbauchement + ", login=" + login + ", password=" + password + "]";
+	}
+
+	@NotNull
     @Size(max = 50)
     private String nom;
 
